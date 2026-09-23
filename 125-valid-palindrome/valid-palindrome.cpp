@@ -1,25 +1,20 @@
 class Solution {
 public:
-    bool isAlphanumeric(char ch){
-        return (ch >= 97 && ch <= 122) || (ch >= 48 && ch <= 57);
-    }
-
-    bool isPalindrome(string s){
-        int n = s.length();
-        int l = 0;
-        int r = n-1;
-
-        while(l<r){
-            char cl = tolower(s[l]);
-            char cr = tolower(s[r]);
-
-            if(!isAlphanumeric(cl)) l++;
-            else if(!isAlphanumeric(cr)) r--;
-            else {
-                if(cl!=cr) return false;
-                l++;
-                r--;
+    bool isPalindrome(string s) {
+        int left = 0;
+        int right = s.length() - 1;
+        while (left < right) {
+            while (left < right && !isalnum(s[left])) {
+                left++;
             }
+            while (left < right && !isalnum(s[right])) {
+                right--;
+            }
+            if (tolower(s[left]) != tolower(s[right])) {
+                return false;
+            }
+            left++;
+            right--;
         }
         return true;
     }
